@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1779e25f03857431485a2a3d9ef6ea70
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _straightSegmentPrefab: {fileID: 1288022045422521157, guid: c7c587636781f48f396e615292135372, type: 3}
+  - _cornerSegmentPrefab: {fileID: 3485743864184211332, guid: b70c5a9399de749f3b324362f2fa32a9, type: 3}
+  - _ropeParent: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

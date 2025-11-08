@@ -12,6 +12,8 @@ public class GridManager : MonoBehaviour
 
     private List<Tile> _highlightedTiles = new List<Tile>();
 
+    public RopeManager RopeManager;
+
     void Start()
     {
         GenerateGrid();

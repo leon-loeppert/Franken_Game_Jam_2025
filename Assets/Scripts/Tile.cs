@@ -27,24 +27,25 @@ public class Tile : MonoBehaviour
     public int Y => _y; // optional getter
 
     // Check for adjacency
-    private bool IsAdjacentToHighlightedTile()
+    private bool IsAdjacentToPrevHighlightedTile()
 {
-    foreach (Tile highlighted in _gridManager.GetHighlightedTiles())
-    {
-        int dx = Mathf.Abs(_x - highlighted.X);
-        int dy = Mathf.Abs(_y - highlighted.Y);
+        Tile PrevHighlighted = _gridManager.GetHighlightedTiles()[_gridManager.GetHighlightedTiles().Count - 1];
+
+        int dx = Mathf.Abs(_x - PrevHighlighted.X);
+        int dy = Mathf.Abs(_y - PrevHighlighted.Y);
 
         if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1))
             return true; // directly next to a highlighted tile
-    }
 
-    return false; // no adjacent highlighted tile found
+        return false; // no adjacent highlighted tile found
 }
+
+
 
     void OnMouseDown()
     {
          if (!_gridManager.GetHighlightedTiles().Contains(this) &&
-         (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToHighlightedTile()))
+         (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToPrevHighlightedTile()))
         {
             Highlight();
         }
@@ -56,7 +57,7 @@ public class Tile : MonoBehaviour
         if (Input.GetMouseButton(0)) // mouse is held down
         {
             if (!_gridManager.GetHighlightedTiles().Contains(this) &&
-                (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToHighlightedTile()))
+                (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToPrevHighlightedTile()))
             {
                 Highlight();
             }
@@ -72,11 +73,15 @@ public class Tile : MonoBehaviour
     private void Highlight()
     {
 
-         if (_isHighlighted) return; // avoid double highlighting (is this needed?)
+        if (_isHighlighted) return; // avoid double highlighting (is this needed?)
 
         _highlight.SetActive(true);
         _isHighlighted = true;
         _gridManager.AddHighlightedTile(this);
+        
+        _gridManager.AddHighlightedTile(this);
+
+        _gridManager.RopeManager.DrawRope(_gridManager.GetHighlightedTiles());
     }
 
     public void ResetHighlight()
