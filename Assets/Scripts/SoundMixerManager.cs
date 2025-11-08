@@ -6,11 +6,13 @@ using UnityEngine.Audio;
 public class SoundMixerManager : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
-    private bool audioMuted;
+    public bool audioMuted;
+    public float currentMasterVol;
 
     public void SetMasterVolume(float level)
     {
         audioMixer.SetFloat("masterVolume", Mathf.Log10(level) * 20f);
+        currentMasterVol = level;
     }
 
     public void SetSoundFXVolume(float level)
@@ -25,15 +27,18 @@ public class SoundMixerManager : MonoBehaviour
 
     public void MuteUnmuteMasterVolume()
     {
+        print("button click");
         if (!audioMuted)
         {
-            
+            print("mute that thang");
+            audioMixer.SetFloat("masterVolume", -80);
             audioMuted = true;
         }
 
         else
         {
-            audioMixer.SetFloat("masterVolume", 0f);
+            print("lets hear that thang");
+            audioMixer.SetFloat("masterVolume", Mathf.Log10(currentMasterVol) * 20f);
             audioMuted = false;
         }
         
