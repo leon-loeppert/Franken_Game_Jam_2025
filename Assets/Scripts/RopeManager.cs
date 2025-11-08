@@ -1,0 +1,113 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RopeManager : MonoBehaviour
+{
+    [SerializeField] private GameObject _straightSegmentPrefab;
+    [SerializeField] private GameObject _cornerSegmentPrefab;
+    [SerializeField] private Transform _ropeParent;
+
+    // Keep track of instantiated rope pieces
+    private List<GameObject> _ropeSegments = new List<GameObject>();
+
+    public void DrawRope(List<Tile> highlightedTiles) //takes highlighted tiles as input
+    {
+        // Clear existing rope
+        foreach (GameObject segment in _ropeSegments)
+            Destroy(segment);
+        _ropeSegments.Clear();
+
+        // skip of not enough tiles (you need at least two tiles to form a segment)
+        if (highlightedTiles.Count < 2) return;
+
+
+        for (int i = 0; i < highlightedTiles.Count - 1; i++) //iterate through consecutive tile pairs
+        {
+            Tile current = highlightedTiles[i];
+            Tile next = highlightedTiles[i + 1];
+            Tile prev = i > 0 ? highlightedTiles[i - 1] : null;
+
+            // get positions of tiles
+            Vector3 startPos = current.transform.position;
+            Vector3 endPos = next.transform.position;
+
+
+            // goes through midpoint?
+            //Vector3 midPoint = (startPos + endPos) / 2f;
+
+            GameObject segment = null;
+
+            // --- Straight segment ---
+            if (startPos.x == endPos.x || startPos.y == endPos.y)
+            {
+                segment = Instantiate(_straightSegmentPrefab, startPos, Quaternion.identity, _ropeParent);
+
+                Vector3 direction = endPos - startPos;
+                float length = direction.magnitude;
+                Vector3 originalScale = segment.transform.localScale;
+                segment.transform.localScale = new Vector3(originalScale.x, length, originalScale.z);
+
+                // Rotate based on direction
+                if (Mathf.Abs(startPos.x - endPos.x) > Mathf.Abs(startPos.y - endPos.y))
+                    segment.transform.rotation = Quaternion.Euler(0, 0, 90); // horizontal
+                else
+                    segment.transform.rotation = Quaternion.Euler(0, 0, 0);  // vertical
+            }
+
+            if (segment != null) {
+                // Stretch segment to cover full distance
+                _ropeSegments.Add(segment);
+            }
+
+            // --- Replace Corner segment ---
+            if (IsCorner(prev, current, next))
+            {
+                segment = Instantiate(_cornerSegmentPrefab, current.transform.position, Quaternion.identity, _ropeParent);
+                segment.transform.rotation = GetCornerRotation(prev, current, next);
+                Destroy(_ropeSegments[_ropeSegments.Count - 1]);
+                _ropeSegments.RemoveAt(_ropeSegments.Count - 1);
+                _ropeSegments.Add(segment);
+            }
+        }
+            
+
+            
+    }
+
+private bool IsCorner(Tile prev, Tile current, Tile next)
+{
+    if (prev == null || next == null)
+        return false;
+
+    bool prevHorizontal = prev.Y == current.Y;
+    bool prevVertical = prev.X == current.X;
+
+    bool nextHorizontal = current.Y == next.Y;
+    bool nextVertical = current.X == next.X;
+
+    // Corner happens if direction changes
+    return (prevHorizontal != nextHorizontal) || (prevVertical != nextVertical);
+}
+
+private Quaternion GetCornerRotation(Tile prev, Tile current, Tile next)
+    {
+        if (prev == null || next == null)
+            return Quaternion.identity;
+
+        int dxPrev = current.X - prev.X;
+        int dyPrev = current.Y - prev.Y;
+        int dxNext = next.X - current.X;
+        int dyNext = next.Y - current.Y;
+
+        if ((dxPrev == 1 && dyNext == 1) || (dyPrev == -1 && dxNext == -1)) // bottom-right
+            return Quaternion.Euler(0, 0, 90);
+        if ((dxPrev == -1 && dyNext == -1) || (dyPrev == 1 && dxNext == 1)) // top-left
+            return Quaternion.Euler(0, 0, 270);
+        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == 1 && dxNext == -1)) // top-right
+            return Quaternion.Euler(0, 0, 180);
+        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == -1 && dxNext == 1)) // bottom-left
+            return Quaternion.Euler(0, 0, 0);
+
+        return Quaternion.identity;
+    }
+}
