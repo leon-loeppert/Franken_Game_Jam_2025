@@ -16,8 +16,6 @@ public class ObjectHighlight : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        print("hover!");
-
         foreach (var renderer in renderers)
         {
 
@@ -32,8 +30,6 @@ public class ObjectHighlight : MonoBehaviour
 
     private void OnMouseExit()
     {
-        print("no more hover!");
-
         foreach (var renderer in renderers)
         {
 
