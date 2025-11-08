@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private int _width, _height;
+    [SerializeField] private int _width = 5;
+    [SerializeField] public int _height = 5;
 
     [SerializeField] private Tile _tilePrefab;
+
     [SerializeField] private Transform _cam;
 
     private List<Tile> _highlightedTiles = new List<Tile>();
