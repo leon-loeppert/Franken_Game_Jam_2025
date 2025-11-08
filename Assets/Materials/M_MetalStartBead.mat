@@ -38,6 +38,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _Shininess: 4.9
     - _USEFRESNEL: 0
     m_Colors: []
   m_BuildTextureStacks: []
