@@ -6,19 +6,60 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
+    private GridManager _gridManager;
 
     private bool _isHighlighted = false;
 
+    public void SetGridManager(GridManager manager)
+    {
+        _gridManager = manager;
+    }
+
+    private int _x, _y;
+
+    public void SetGridPosition(int x, int y)
+    {
+        _x = x;
+        _y = y;
+    }
+
+    public int X => _x; // optional getter
+    public int Y => _y; // optional getter
+
+    // Check for adjacency
+    private bool IsAdjacentToHighlightedTile()
+{
+    foreach (Tile highlighted in _gridManager.GetHighlightedTiles())
+    {
+        int dx = Mathf.Abs(_x - highlighted.X);
+        int dy = Mathf.Abs(_y - highlighted.Y);
+
+        if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1))
+            return true; // directly next to a highlighted tile
+    }
+
+    return false; // no adjacent highlighted tile found
+}
+
     void OnMouseDown()
     {
-        Highlight();
+         if (!_gridManager.GetHighlightedTiles().Contains(this) &&
+         (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToHighlightedTile()))
+        {
+            Highlight();
+        }
+        //Highlight(this);
     }
 
     void OnMouseEnter()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)) // mouse is held down
         {
-            Highlight();
+            if (!_gridManager.GetHighlightedTiles().Contains(this) &&
+                (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToHighlightedTile()))
+            {
+                Highlight();
+            }
         }
     }
 
@@ -27,30 +68,45 @@ public class Tile : MonoBehaviour
         //nothing
     }
 
-        private void OnMouseOver()
-    {
-        _highlight.SetActive(Input.GetMouseButton(0)); //set active because we do not click in (but only when mouse is clicked)
-    }
 
     private void Highlight()
     {
+
+         if (_isHighlighted) return; // avoid double highlighting (is this needed?)
+
         _highlight.SetActive(true);
         _isHighlighted = true;
+        _gridManager.AddHighlightedTile(this);
     }
 
     public void ResetHighlight()
     {
         _highlight.SetActive(false);
         _isHighlighted = false;
+        _gridManager.RemoveHighlightedTile(this);
     }
 
     
 
-        private void Update()
+private void Update()
+{
+    if (!Input.GetMouseButton(0))
     {
-        if (!Input.GetMouseButton(0))
+        // Only clear if the tile is highlighted
+        if (_isHighlighted)
         {
-            _highlight.SetActive(false);
+            ResetHighlight();
+        }
+
+        // Optional: clear all highlighted tiles in the manager
+        // Only do this once, so you might want to check a flag
+        if (_gridManager.GetHighlightedTiles().Count > 0)
+        {
+            foreach (Tile tile in new List<Tile>(_gridManager.GetHighlightedTiles()))
+            {
+                tile.ResetHighlight();
+            }
         }
     }
+}
 }
