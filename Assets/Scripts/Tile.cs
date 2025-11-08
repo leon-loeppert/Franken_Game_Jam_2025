@@ -81,7 +81,7 @@ public class Tile : MonoBehaviour
         
         _gridManager.AddHighlightedTile(this);
 
-        _gridManager.RopeManager.DrawRope(_gridManager.GetHighlightedTiles());
+        _gridManager.RopeManager.DrawRope(_gridManager.GetHighlightedTiles()); // draw rope on every highlight
     }
 
     public void ResetHighlight()
