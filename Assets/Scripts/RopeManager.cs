@@ -24,16 +24,12 @@ public class RopeManager : MonoBehaviour
         for (int i = 0; i < highlightedTiles.Count - 1; i++) //iterate through consecutive tile pairs
         {
             Tile current = highlightedTiles[i];
-            Tile next = highlightedTiles[i + 1];
             Tile prev = i > 0 ? highlightedTiles[i - 1] : null;
+            Tile next = highlightedTiles[i + 1];
 
             // get positions of tiles
             Vector3 startPos = current.transform.position;
             Vector3 endPos = next.transform.position;
-
-
-            // goes through midpoint?
-            //Vector3 midPoint = (startPos + endPos) / 2f;
 
             GameObject segment = null;
 
@@ -54,7 +50,8 @@ public class RopeManager : MonoBehaviour
                     segment.transform.rotation = Quaternion.Euler(0, 0, 0);  // vertical
             }
 
-            if (segment != null) {
+            if (segment != null)
+            {
                 // Stretch segment to cover full distance
                 _ropeSegments.Add(segment);
             }
@@ -69,7 +66,10 @@ public class RopeManager : MonoBehaviour
                 _ropeSegments.Add(segment);
             }
         }
-            
+
+        // Draw latest rope element
+        // make a new check!
+        // Tile last = highlightedTiles[ighlightedTiles.Count]
 
             
     }

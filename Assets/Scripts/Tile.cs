@@ -79,9 +79,7 @@ public class Tile : MonoBehaviour
         _isHighlighted = true;
         _gridManager.AddHighlightedTile(this);
         
-        _gridManager.AddHighlightedTile(this);
-
-        _gridManager.RopeManager.DrawRope(_gridManager.GetHighlightedTiles()); // draw rope on every highlight
+        _gridManager.RopeManager.DrawRope(_gridManager.GetHighlightedTiles()); // draw complete rope from scratch on every new highlight
     }
 
     public void ResetHighlight()
@@ -103,15 +101,6 @@ private void Update()
             ResetHighlight();
         }
 
-        // Optional: clear all highlighted tiles in the manager
-        // Only do this once, so you might want to check a flag
-        if (_gridManager.GetHighlightedTiles().Count > 0)
-        {
-            foreach (Tile tile in new List<Tile>(_gridManager.GetHighlightedTiles()))
-            {
-                tile.ResetHighlight();
-            }
-        }
     }
 }
 }
