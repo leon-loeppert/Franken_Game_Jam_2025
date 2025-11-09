@@ -7,6 +7,8 @@ public class RopeManager : MonoBehaviour
     [SerializeField] private GameObject _cornerSegmentPrefab;
     [SerializeField] private Transform _ropeParent;
 
+    [SerializeField] private AudioClip _ropeExtendSound;
+
     // Keep track of instantiated rope pieces
     private List<GameObject> _ropeSegments = new List<GameObject>();
 
@@ -52,7 +54,7 @@ public class RopeManager : MonoBehaviour
             // --- Straight segment ---
             if (startPos.x == endPos.x || startPos.y == endPos.y)
             {
-
+                print("spawn rope");
                 segment = Instantiate(_straightSegmentPrefab, startPos, Quaternion.identity, _ropeParent);
 
                 // Stretch segment to cover full distance

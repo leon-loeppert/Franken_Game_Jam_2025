@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private int _width = 5;
     [SerializeField] public int _height = 5;
+    [SerializeField] public float _spacing = 1.1f;
 
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private List<Item> _itemPrefabs;
@@ -28,13 +29,13 @@ public class GridManager : MonoBehaviour
 
     void GenerateGrid()
     {
-        float spacing = 1.1f;
+        //float spacing = 1.1f;
 
         for (int x = 0; x < _width; x++)
         {
             for (int y = 0; y < _height; y++)
             {
-                Vector3 tilePosition = new Vector3(x * spacing, y * spacing, 0);
+                Vector3 tilePosition = new Vector3(x * _spacing, y * _spacing, 0);
                 var spawnedTile = Instantiate(_tilePrefab, tilePosition, Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
                 spawnedTile.SetGridManager(this);
@@ -43,7 +44,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        _cam.transform.position = new Vector3((_width * spacing) / 2 - spacing / 2, (_height * spacing) / 2 - spacing / 2, -10);
+        _cam.transform.position = new Vector3((_width * _spacing) / 2 - _spacing / 2, (_height * _spacing) / 2 - _spacing / 2, -10);
     }
 
     // Add a tile to the list
