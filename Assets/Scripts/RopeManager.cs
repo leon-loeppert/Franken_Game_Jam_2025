@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class RopeManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class RopeManager : MonoBehaviour
     [SerializeField] private Transform _ropeParent;
 
     [SerializeField] private AudioClip _ropeExtendSound;
+    [SerializeField] private AudioClip _failedChainSound;
+    [SerializeField] private float _waitToDelete;
     [SerializeField] private LevelManager _levelManager;
 
     // Keep track of instantiated rope pieces
@@ -56,6 +59,7 @@ public class RopeManager : MonoBehaviour
             if (startPos.x == endPos.x || startPos.y == endPos.y)
             {
                 print("spawn rope");
+                SoundFXManager.instance.PlaySoundFXClip(_ropeExtendSound, transform, 1);
                 segment = Instantiate(_straightSegmentPrefab, startPos, Quaternion.identity, _ropeParent);
 
                 // Stretch segment to cover full distance
@@ -146,14 +150,24 @@ public class RopeManager : MonoBehaviour
         {
 
             // Implement Fail sound here
+            SoundFXManager.instance.PlaySoundFXClip(_failedChainSound, transform, 1.5f);
+
             //Implement wait 1-2 seconds here (such that tiles do not get immediately deleted)
-            foreach (GameObject segment in _ropeSegments)
-            {
-                Destroy(segment);
-            }
-            _ropeSegments.Clear();
+            StartCoroutine(DestroyRopeSegments());
         }
 
+    }
+
+    IEnumerator DestroyRopeSegments()
+    {
+        //Wait until SoundFX and VFX are complete
+        yield return new WaitForSeconds(_waitToDelete);
+
+        foreach (GameObject segment in _ropeSegments)
+        {
+            Destroy(segment);
+        }
+        _ropeSegments.Clear();
     }
 
     private bool IsCorner(Tile prev, Tile current, Tile next)
