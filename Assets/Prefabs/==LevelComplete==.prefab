@@ -462,7 +462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6146192587920044911}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.0443689, z: 17.211782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1012,6 +1012,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6852853514360458834}
     m_Modifications:
+    - target: {fileID: 1014035726182877604, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_Name
+      value: BeadTransform02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040016922027508860, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887773405047712714, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174480526019929903, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_Name
+      value: BeadTransform03
+      objectReference: {fileID: 0}
     - target: {fileID: 3238139655838311052, guid: 438cc86b6a5798449b8830683794471f, type: 3}
       propertyPath: m_Name
       value: Bracelet
@@ -1054,6 +1070,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3327188652396216457, guid: 438cc86b6a5798449b8830683794471f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403979378190527047, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682652660474010906, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_Name
+      value: BeadTransform04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462859065931824247, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_Name
+      value: BeadTransform01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8947581089063595919, guid: 438cc86b6a5798449b8830683794471f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -737,7 +737,10 @@ MonoBehaviour:
   _straightSegmentPrefab: {fileID: 6536309855620794667, guid: ac437c8d1056c6643b5f632359aa5c5f, type: 3}
   _cornerSegmentPrefab: {fileID: 4442914932727910049, guid: 99632724a5d41be46abe71b5e41c2387, type: 3}
   _ropeParent: {fileID: 0}
-  _ropeExtendSound: {fileID: 0}
+  _ropeExtendSound: {fileID: 8300000, guid: f6d7ee689094bea44ac809b6969ada81, type: 3}
+  _failedChainSound: {fileID: 8300000, guid: 1470e96c2c77e9f41ad1ede489a290cc, type: 3}
+  _waitToDelete: 1
+  _levelManager: {fileID: 139663685}
 --- !u!4 &753052812
 Transform:
   m_ObjectHideFlags: 0
