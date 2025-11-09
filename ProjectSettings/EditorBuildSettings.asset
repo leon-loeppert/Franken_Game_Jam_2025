@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: b37211341caf0ef44bb4e2dcb010f96d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/VisualTestScene.unity
     guid: 405abe6ad0cbee9489b18f4400d0e23a
   - enabled: 1

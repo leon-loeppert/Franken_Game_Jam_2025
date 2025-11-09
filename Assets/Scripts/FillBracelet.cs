@@ -5,7 +5,7 @@ using UnityEngine;
 public class FillBracelet : MonoBehaviour
 {
     [SerializeField] private List<Item> itemOrder;
-    [SerializeField] private GridManager gridScript;
+    //[SerializeField] private GridManager gridScript;
 
     [SerializeField] private Transform socketOne;
     [SerializeField] private Transform socketTwo;
