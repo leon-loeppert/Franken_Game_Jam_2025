@@ -13,6 +13,8 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Transform _cam;
 
+    [SerializeField] private RectTransform _itemQueuePanel;
+
     private List<Tile> _highlightedTiles = new List<Tile>();
     private List<Tile> _allTiles = new List<Tile>();
 
@@ -95,11 +97,20 @@ public class GridManager : MonoBehaviour
             Item currentItemPrefab = itemPool[randomItemIndex];
             itemPool.RemoveAt(randomItemIndex); // no duplicates
 
-            // Spawn item at chosen location
+            // Spawn item at chosen location in grid
             Vector3 itemPosition = chosenTile.transform.position + Vector3.forward * -0.1f; //put it to front
             Item spawnedItem = Instantiate(currentItemPrefab, itemPosition, currentItemPrefab.transform.rotation);
             spawnedItem.name = $"Item {i + 1}";
             spawnedItem.SetOrderIndex(i + 1);
+
+            // Spawn 3D item inside the panel
+            Item itemQueue = Instantiate(currentItemPrefab, _itemQueuePanel);
+
+            float itemSpacing = 1.5f; // space between items in world units
+            itemQueue.transform.localPosition = new Vector3(0, -i * itemSpacing, 0);
+            itemQueue.transform.localRotation = Quaternion.identity;
+            itemQueue.transform.localScale = Vector3.one * 0.5f;
+
 
         }
 
