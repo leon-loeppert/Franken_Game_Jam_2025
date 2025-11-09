@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private AudioClip successSound;
     [SerializeField] private float successVolume = 1;
+    [SerializeField] private GameObject successFX;
 
     
     public void CompleteLevel()
@@ -20,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
         //Play SoundFX & VFX
         SoundFXManager.instance.PlaySoundFXClip(successSound, transform, successVolume);
+        successFX.SetActive(true);
     }
 
     IEnumerator ChangeScreen()
