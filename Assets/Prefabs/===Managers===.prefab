@@ -78,6 +78,7 @@ Transform:
   - {fileID: 6114843159227300988}
   - {fileID: 5128306115220514759}
   - {fileID: 494173497055904347}
+  - {fileID: 1983343606495269629}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7771531154341748057
@@ -301,6 +302,52 @@ MonoBehaviour:
   buttonClickFX: {fileID: 0}
   buttonHoverVolume: 10
   buttonClickVolume: 1
+--- !u!1 &8721226286673574690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983343606495269629}
+  - component: {fileID: 5019456120475660291}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1983343606495269629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721226286673574690}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8454795115949540855}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5019456120475660291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721226286673574690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251e7c9a628dcfc478ffa27519a8f14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeGameScreen: {fileID: 0}
+  lvlCompleteScreen: {fileID: 0}
 --- !u!1 &8836700590846222973
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,3 +393,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: cd1e349d2549ca6448372cfe693913d8, type: 2}
+  audioMuted: 0
+  currentMasterVol: 0

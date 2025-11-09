@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StarsMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 5832632662411aa4b8d28293e64084d5, type: 3}
-  m_Parent: {fileID: 0}
+  m_Name: M_BeadBase_Purple
+  m_Shader: {fileID: -6465566751694194690, guid: a96c99331558a38468713899f2e548b7, type: 3}
+  m_Parent: {fileID: 2100000, guid: c9172220fa753f64a89449bf238e821f, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -22,31 +22,14 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _BlinkingSpeed: 0.005
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _StarScale: 3
-    - _StarsPower: 36
-    - _Stars_Density: 75
+    m_Floats: []
     m_Colors:
-    - _StarsColor: {r: 2.9469385, g: 1.9858471, b: 5.0845366, a: 0}
+    - _ColorBase: {r: 0.636343, g: 0.5058824, b: 0.9607843, a: 0}
+    - _ColorFresnel: {r: 1.2972914, g: 2.3225968, b: 2.6082382, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8887128382664632374
+--- !u!114 &8552091477947200625
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
