@@ -24,7 +24,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 899833d6789603d4e9eb423899b47e01, type: 3}
   m_Parent: {fileID: 2100000, guid: d036e47b074324e43b78b013f51f7e38, type: 2}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _USEFRESNEL
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,6 +40,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _Shininess: 4.9
-    - _USEFRESNEL: 0
+    - _USEFRESNEL: 1
     m_Colors: []
   m_BuildTextureStacks: []
