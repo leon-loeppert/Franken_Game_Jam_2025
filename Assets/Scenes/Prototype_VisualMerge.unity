@@ -406,7 +406,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3002762635732863291, guid: 7e7e7d9a64bf84e4a907e93aa7df1e24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1670642593}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e7e7d9a64bf84e4a907e93aa7df1e24, type: 3}
 --- !u!4 &334226006 stripped
@@ -1842,6 +1845,7 @@ MonoBehaviour:
   - {fileID: 1769508655}
   - {fileID: 1948165393}
   _cam: {fileID: 519420032}
+  _itemQueuePanel: {fileID: 1670642593}
   RopeManager: {fileID: 753052811}
 --- !u!4 &1601961339
 Transform:
@@ -1869,6 +1873,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52eeb7012627046459d627abf04a247e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1670642592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1670642593}
+  m_Layer: 0
+  m_Name: QueueStartTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1670642593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670642592}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 334226006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1716152833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9112469487082906240, guid: 06083a40cb290af468080246a277af39, type: 3}

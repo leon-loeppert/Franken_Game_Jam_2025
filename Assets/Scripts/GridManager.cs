@@ -13,7 +13,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Transform _cam;
 
-    [SerializeField] private RectTransform _itemQueuePanel;
+    [SerializeField] private Transform _itemQueuePanel;
 
     private List<Tile> _highlightedTiles = new List<Tile>();
     private List<Tile> _allTiles = new List<Tile>();
