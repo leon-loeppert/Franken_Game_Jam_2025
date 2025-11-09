@@ -93,7 +93,7 @@ public class GridManager : MonoBehaviour
             // Pick random item prefab
             int randomItemIndex = UnityEngine.Random.Range(0, itemPool.Count);
             Item currentItemPrefab = itemPool[randomItemIndex];
-            itemPool.RemoveAt(randomItemIndex); // 🧽 no duplicates
+            itemPool.RemoveAt(randomItemIndex); // no duplicates
 
             // Spawn item at chosen location
             Vector3 itemPosition = chosenTile.transform.position + Vector3.forward * -0.1f; //put it to front
