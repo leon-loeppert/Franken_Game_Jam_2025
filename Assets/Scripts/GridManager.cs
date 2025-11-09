@@ -86,9 +86,12 @@ public class GridManager : MonoBehaviour
 
         List<Item> itemPool = new List<Item>(_itemPrefabs); // we don't want list to be emptied permanently
 
+        List<int> itemLocations = new List<int> { 0, 6, 12, 13, 14, 15};
+        
         for (int i = 0; i < count; i++)
         {
-            int randomTileIndex = UnityEngine.Random.Range(0, availableTiles.Count);
+            // int randomTileIndex = UnityEngine.Random.Range(0, availableTiles.Count); // random number!
+            int randomTileIndex = itemLocations[i];
             Tile chosenTile = availableTiles[randomTileIndex];
             chosenTiles.Add(chosenTile);
             availableTiles.RemoveAt(randomTileIndex);
