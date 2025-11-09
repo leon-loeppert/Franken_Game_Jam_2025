@@ -77,6 +77,7 @@ public class RopeManager : MonoBehaviour
             if (IsCorner(prev, current, next))
             {
                 segment = Instantiate(_cornerSegmentPrefab, current.transform.position, Quaternion.identity, _ropeParent);
+
                 segment.transform.rotation = GetCornerRotation(prev, current, next);
                 Destroy(_ropeSegments[_ropeSegments.Count - 1]);
                 _ropeSegments.RemoveAt(_ropeSegments.Count - 1);
@@ -110,9 +111,10 @@ public class RopeManager : MonoBehaviour
 
 
         // TODO
+        // implement here:
     // if (isLoop) and if all items are collected in the correct order: levelcomplete => level complete screen
 
-       
+
     }
 
 private bool IsCorner(Tile prev, Tile current, Tile next)
