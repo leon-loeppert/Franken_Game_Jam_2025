@@ -81,12 +81,11 @@ public class GridManager : MonoBehaviour
         List<Tile> availableTiles = new List<Tile>(_allTiles);
         List<Tile> chosenTiles = new List<Tile>();
 
-        // Define color palette (replace by textures)
-        List<Color> palette = new List<Color> { Color.yellow, Color.blue, Color.red };
-
         List<Item> itemPool = new List<Item>(_itemPrefabs); // we don't want list to be emptied permanently
 
         List<int> itemLocations = new List<int> { 0, 6, 12, 13, 14, 15};
+
+        List<int> ItemIndexList = new List<int>();
         
         for (int i = 0; i < count; i++)
         {
@@ -98,6 +97,8 @@ public class GridManager : MonoBehaviour
 
             // Pick random item prefab
             int randomItemIndex = UnityEngine.Random.Range(0, itemPool.Count);
+            ItemIndexList.Add(randomItemIndex);
+            
             Item currentItemPrefab = itemPool[randomItemIndex];
             itemPool.RemoveAt(randomItemIndex); // no duplicates
 
