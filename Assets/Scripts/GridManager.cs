@@ -9,16 +9,19 @@ public class GridManager : MonoBehaviour
     [SerializeField] public int _height = 5;
 
     [SerializeField] private Tile _tilePrefab;
+    [SerializeField] private Item _itemPrefab;
 
     [SerializeField] private Transform _cam;
 
     private List<Tile> _highlightedTiles = new List<Tile>();
+    private List<Tile> _allTiles = new List<Tile>();
 
     public RopeManager RopeManager;
 
     void Start()
     {
         GenerateGrid();
+        SpawnOrderedItems(3);
     }
 
     void GenerateGrid()
@@ -34,6 +37,7 @@ public class GridManager : MonoBehaviour
                 spawnedTile.name = $"Tile {x} {y}";
                 spawnedTile.SetGridManager(this);
                 spawnedTile.SetGridPosition(x, y);
+                _allTiles.Add(spawnedTile);
             }
         }
 
@@ -58,6 +62,47 @@ public class GridManager : MonoBehaviour
     public List<Tile> GetHighlightedTiles()
     {
         return _highlightedTiles;
+    }
+
+    void SpawnOrderedItems(int count)
+    {
+        if (_allTiles.Count < count)
+        {
+            Debug.LogWarning("Not enough tiles to place items!");
+            return;
+        }
+
+        List<Tile> availableTiles = new List<Tile>(_allTiles);
+        List<Tile> chosenTiles = new List<Tile>();
+
+        // Define color palette (replace by textures)
+        List<Color> palette = new List<Color> {Color.yellow, Color.blue, Color.red};
+
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, availableTiles.Count);
+            Tile chosenTile = availableTiles[randomIndex];
+            chosenTiles.Add(chosenTile);
+            availableTiles.RemoveAt(randomIndex);
+        }
+
+        for (int i = 0; i < chosenTiles.Count; i++)
+        {
+            Vector3 itemPosition = chosenTiles[i].transform.position + Vector3.forward * -0.1f; // so it appears on top
+            Item spawnedItem = Instantiate(_itemPrefab, itemPosition, Quaternion.identity);
+            spawnedItem.name = $"Item {i + 1}";
+            spawnedItem.SetOrderIndex(i + 1);
+
+            // Assign random colors from palette (or later textures) => replace .SetColor by .SetTexture
+            int randomColorInt = UnityEngine.Random.Range(0, palette.Count);
+            Color randomColor = palette[randomColorInt];
+            palette.RemoveAt(randomColorInt);
+            spawnedItem.SetColor(randomColor);
+        }
+
+
+        
+
     }
 
 
