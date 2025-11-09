@@ -85,7 +85,7 @@ public class RopeManager : MonoBehaviour
             }
         }
 
-        // Draw latest rope element
+        // Draw last rope element
         Tile lastTile = highlightedTiles[highlightedTiles.Count - 1];
         Vector3 lastPos = lastTile.transform.position;
 
@@ -98,7 +98,7 @@ public class RopeManager : MonoBehaviour
         Vector3 direction_last = lastPos - prevlastPos;
         last_segment.transform.localScale = new Vector3(last_segment.transform.localScale.x, direction_last.magnitude, last_segment.transform.localScale.z);
 
-        // Rotate based on direction
+        // Rotate last based on direction
         if (Mathf.Abs(prevlastPos.x - lastPos.x) > Mathf.Abs(prevlastPos.y - lastPos.y))
             last_segment.transform.rotation = Quaternion.Euler(0, 0, 90); // horizontal
         else
@@ -109,10 +109,17 @@ public class RopeManager : MonoBehaviour
             _ropeSegments.Add(last_segment);
         }
 
+        // Remove last segment if it is a corner
+        if (isLoop)
+        {
+            Destroy(_ropeSegments[_ropeSegments.Count - 1]);
+            _ropeSegments.RemoveAt(_ropeSegments.Count - 1);
+        }
+
 
         // TODO
         // implement here:
-    // if (isLoop) and if all items are collected in the correct order: levelcomplete => level complete screen
+        // if (isLoop) and if all items are collected in the correct order: levelcomplete => level complete screen
 
 
     }
