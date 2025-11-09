@@ -9,7 +9,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] public int _height = 5;
 
     [SerializeField] private Tile _tilePrefab;
-    [SerializeField] private Item _itemPrefab;
+    [SerializeField] private List<Item> _itemPrefabs;
 
     [SerializeField] private Transform _cam;
 
@@ -21,7 +21,7 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         GenerateGrid();
-        SpawnOrderedItems(3);
+        SpawnOrderedItems();
     }
 
     void GenerateGrid()
@@ -64,41 +64,46 @@ public class GridManager : MonoBehaviour
         return _highlightedTiles;
     }
 
-    void SpawnOrderedItems(int count)
+    void SpawnOrderedItems()
     {
+        int count = _itemPrefabs.Count;
+
         if (_allTiles.Count < count)
         {
             Debug.LogWarning("Not enough tiles to place items!");
             return;
         }
 
+        // For random locations (which tiles are still available for spawning?)
         List<Tile> availableTiles = new List<Tile>(_allTiles);
         List<Tile> chosenTiles = new List<Tile>();
 
         // Define color palette (replace by textures)
-        List<Color> palette = new List<Color> {Color.yellow, Color.blue, Color.red};
+        List<Color> palette = new List<Color> { Color.yellow, Color.blue, Color.red };
+
+        List<Item> itemPool = new List<Item>(_itemPrefabs); // we don't want list to be emptied permanently
 
         for (int i = 0; i < count; i++)
         {
-            int randomIndex = UnityEngine.Random.Range(0, availableTiles.Count);
-            Tile chosenTile = availableTiles[randomIndex];
+            int randomTileIndex = UnityEngine.Random.Range(0, availableTiles.Count);
+            Tile chosenTile = availableTiles[randomTileIndex];
             chosenTiles.Add(chosenTile);
-            availableTiles.RemoveAt(randomIndex);
-        }
+            availableTiles.RemoveAt(randomTileIndex);
 
-        for (int i = 0; i < chosenTiles.Count; i++)
-        {
-            Vector3 itemPosition = chosenTiles[i].transform.position + Vector3.forward * -0.1f; // so it appears on top
-            Item spawnedItem = Instantiate(_itemPrefab, itemPosition, Quaternion.identity);
+            // Pick random item prefab
+            int randomItemIndex = UnityEngine.Random.Range(0, itemPool.Count);
+            Item currentItemPrefab = itemPool[randomItemIndex];
+            itemPool.RemoveAt(randomItemIndex); // no duplicates
+
+            // Spawn item at chosen location
+            Vector3 itemPosition = chosenTile.transform.position + Vector3.forward * -0.1f; //put it to front
+            Item spawnedItem = Instantiate(currentItemPrefab, itemPosition, currentItemPrefab.transform.rotation);
             spawnedItem.name = $"Item {i + 1}";
             spawnedItem.SetOrderIndex(i + 1);
 
-            // Assign random colors from palette (or later textures) => replace .SetColor by .SetTexture
-            int randomColorInt = UnityEngine.Random.Range(0, palette.Count);
-            Color randomColor = palette[randomColorInt];
-            palette.RemoveAt(randomColorInt);
-            spawnedItem.SetColor(randomColor);
         }
+
+
 
 
         
