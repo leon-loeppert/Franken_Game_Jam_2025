@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FillBracelet : MonoBehaviour
 {
-    [SerializeField] private List<Item> itemOrder;
+    [SerializeField] private List<GameObject> itemOrder;
     //[SerializeField] private GridManager gridScript;
 
     [SerializeField] private Transform socketOne;
@@ -16,12 +16,12 @@ public class FillBracelet : MonoBehaviour
     {
         //assign list through gridmanager
 
-        foreach(Item item in itemOrder)
+        foreach(GameObject itemGO in itemOrder)
         {
-            item.GetComponent<RotateObject>().stopRotate = true;
+            itemGO.GetComponent<RotateObject>().stopRotate = true;
             //item.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            item.transform.Find("BeadTransform").transform.localRotation = new Quaternion(0f,0f,0f,0f);
-            item.transform.Find("BeadTransform").transform.localScale = new Vector3(1f, 1f, 1f);
+            itemGO.transform.Find("BeadTransform").transform.localRotation = new Quaternion(0f,0f,0f,0f);
+            itemGO.transform.Find("BeadTransform").transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         Instantiate(itemOrder[0], socketOne);
