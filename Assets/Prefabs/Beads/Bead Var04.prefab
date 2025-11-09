@@ -126,6 +126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bead Var04
       objectReference: {fileID: 0}
+    - target: {fileID: 1680101377275897097, guid: 7a68e90e7bbce5448bbd1fea293dca07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
