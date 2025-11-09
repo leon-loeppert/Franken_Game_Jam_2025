@@ -17,20 +17,36 @@ public class RopeManager : MonoBehaviour
             Destroy(segment);
         _ropeSegments.Clear();
 
-        // skip of not enough tiles (you need at least two tiles to form a segment)
+        // skip if not enough tiles (you need at least two tiles to form a segment)
         if (highlightedTiles.Count < 2) return;
 
+        bool isLoop = false;
+        if (highlightedTiles.Count > 2)
+        {
+            Tile first = highlightedTiles[0];
+            Tile last = highlightedTiles[highlightedTiles.Count - 1];
 
-        for (int i = 0; i < highlightedTiles.Count - 1; i++) //iterate through consecutive tile pairs
+            // Check if they are directly connected (adjacent)
+            if ((Mathf.Abs(first.X - last.X) == 1 && first.Y == last.Y) ||
+                (Mathf.Abs(first.Y - last.Y) == 1 && first.X == last.X))
+            {
+                isLoop = true;
+            }
+        }
+
+
+        int segmentCount = isLoop ? highlightedTiles.Count : highlightedTiles.Count - 1;
+
+        for (int i = 0; i < segmentCount; i++)
         {
             Tile current = highlightedTiles[i];
-            Tile prev = i > 0 ? highlightedTiles[i - 1] : null;
-            Tile next = highlightedTiles[i + 1];
+            Tile prev = i > 0 ? highlightedTiles[i - 1] : (isLoop ? highlightedTiles[highlightedTiles.Count - 1] : null); // if you are not at the first tile again, then take just prev tile; if you are at the first tile again, the previous tile is just the last from the list
+            Tile next = (i + 1 < highlightedTiles.Count) ? highlightedTiles[i + 1] : (isLoop ? highlightedTiles[0] : null); // if you are not at the first tile again, then take just next tile; if you are at the first tile again, the next tile is just the first tile from the list
 
             // get positions of tiles
             Vector3 startPos = current.transform.position;
             Vector3 endPos = next.transform.position;
-            
+
             GameObject segment = null;
 
             // --- Straight segment ---
@@ -69,7 +85,6 @@ public class RopeManager : MonoBehaviour
         }
 
         // Draw latest rope element
-        // make a new check!
         Tile lastTile = highlightedTiles[highlightedTiles.Count - 1];
         Vector3 lastPos = lastTile.transform.position;
 
@@ -91,7 +106,13 @@ public class RopeManager : MonoBehaviour
         if (last_segment != null)
         {
             _ropeSegments.Add(last_segment);
-        }         
+        }
+
+
+        // TODO
+    // if (isLoop) and if all items are collected in the correct order: levelcomplete => level complete screen
+
+       
     }
 
 private bool IsCorner(Tile prev, Tile current, Tile next)
