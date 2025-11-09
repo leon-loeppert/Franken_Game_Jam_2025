@@ -30,14 +30,16 @@ public class RopeManager : MonoBehaviour
             // get positions of tiles
             Vector3 startPos = current.transform.position;
             Vector3 endPos = next.transform.position;
-
+            
             GameObject segment = null;
 
             // --- Straight segment ---
             if (startPos.x == endPos.x || startPos.y == endPos.y)
             {
+
                 segment = Instantiate(_straightSegmentPrefab, startPos, Quaternion.identity, _ropeParent);
 
+                // Stretch segment to cover full distance
                 Vector3 direction = endPos - startPos;
                 float length = direction.magnitude;
                 Vector3 originalScale = segment.transform.localScale;
@@ -52,7 +54,6 @@ public class RopeManager : MonoBehaviour
 
             if (segment != null)
             {
-                // Stretch segment to cover full distance
                 _ropeSegments.Add(segment);
             }
 
@@ -69,9 +70,28 @@ public class RopeManager : MonoBehaviour
 
         // Draw latest rope element
         // make a new check!
-        // Tile last = highlightedTiles[ighlightedTiles.Count]
+        Tile lastTile = highlightedTiles[highlightedTiles.Count - 1];
+        Vector3 lastPos = lastTile.transform.position;
 
-            
+        Tile prevlastTile = highlightedTiles[highlightedTiles.Count - 2];
+        Vector3 prevlastPos = prevlastTile.transform.position;
+
+        GameObject last_segment = null;
+        last_segment = Instantiate(_straightSegmentPrefab, lastPos, Quaternion.identity, _ropeParent);
+
+        Vector3 direction_last = lastPos - prevlastPos;
+        last_segment.transform.localScale = new Vector3(last_segment.transform.localScale.x, direction_last.magnitude, last_segment.transform.localScale.z);
+
+        // Rotate based on direction
+        if (Mathf.Abs(prevlastPos.x - lastPos.x) > Mathf.Abs(prevlastPos.y - lastPos.y))
+            last_segment.transform.rotation = Quaternion.Euler(0, 0, 90); // horizontal
+        else
+            last_segment.transform.rotation = Quaternion.Euler(0, 0, 0);  // vertical
+
+        if (last_segment != null)
+        {
+            _ropeSegments.Add(last_segment);
+        }         
     }
 
 private bool IsCorner(Tile prev, Tile current, Tile next)
