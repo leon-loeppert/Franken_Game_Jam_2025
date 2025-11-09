@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52eeb7012627046459d627abf04a247e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelLoadWait: 0.5
 --- !u!1 &5793608219458754907
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e488eabf80092948b35926340f25423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonHoverFX: {fileID: 8300000, guid: d357b6679b6aa504b9db31a52b06779f, type: 3}
-  buttonClickFX: {fileID: 0}
+  buttonHoverFX: {fileID: 8300000, guid: 738440c9998890543b598cca9f24c25d, type: 3}
+  buttonClickFX: {fileID: 8300000, guid: 7eb173fb84daf964bb626cb065838740, type: 3}
   buttonHoverVolume: 10
   buttonClickVolume: 1
 --- !u!1 &8721226286673574690
@@ -347,7 +348,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeGameScreen: {fileID: 0}
+  gameGridObject: {fileID: 0}
   lvlCompleteScreen: {fileID: 0}
+  waitTime: 3
+  successSound: {fileID: 8300000, guid: 3925899af23196e458181e03557f199c, type: 3}
+  successVolume: 1
 --- !u!1 &8836700590846222973
 GameObject:
   m_ObjectHideFlags: 0
