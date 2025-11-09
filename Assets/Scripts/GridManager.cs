@@ -95,9 +95,9 @@ public class GridManager : MonoBehaviour
             Item currentItemPrefab = itemPool[randomItemIndex];
             itemPool.RemoveAt(randomItemIndex); // 🧽 no duplicates
 
-             // Spawn item at chosen location
-            Vector3 itemPosition = chosenTile.transform.position + Vector3.forward * -0.1f;
-            Item spawnedItem = Instantiate(currentItemPrefab, itemPosition, Quaternion.identity);
+            // Spawn item at chosen location
+            Vector3 itemPosition = chosenTile.transform.position + Vector3.forward * -0.1f; //put it to front
+            Item spawnedItem = Instantiate(currentItemPrefab, itemPosition, currentItemPrefab.transform.rotation);
             spawnedItem.name = $"Item {i + 1}";
             spawnedItem.SetOrderIndex(i + 1);
 
