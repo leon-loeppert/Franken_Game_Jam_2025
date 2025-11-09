@@ -90,17 +90,33 @@ public class Tile : MonoBehaviour
     }
 
     
+    private Item _item; // reference to the item on this tile
+
+public void SetItem(Item item)
+{
+    _item = item;
+}
+
+public bool HasItem()
+{
+    return _item != null;
+}
+
+public Item GetItem()
+{
+    return _item;
+}
 
 private void Update()
-{
-    if (!Input.GetMouseButton(0))
     {
-        // Only clear if the tile is highlighted
-        if (_isHighlighted)
+        if (!Input.GetMouseButton(0))
         {
-            ResetHighlight();
-        }
+            // Only clear if the tile is highlighted
+            if (_isHighlighted)
+            {
+                ResetHighlight();
+            }
 
+        }
     }
-}
 }

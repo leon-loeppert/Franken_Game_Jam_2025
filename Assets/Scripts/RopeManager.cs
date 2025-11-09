@@ -8,6 +8,7 @@ public class RopeManager : MonoBehaviour
     [SerializeField] private Transform _ropeParent;
 
     [SerializeField] private AudioClip _ropeExtendSound;
+    [SerializeField] private LevelManager _levelManager;
 
     // Keep track of instantiated rope pieces
     private List<GameObject> _ropeSegments = new List<GameObject>();
@@ -119,29 +120,58 @@ public class RopeManager : MonoBehaviour
         }
 
 
-        // TODO
-        // implement here:
-        // if (isLoop) and if all items are collected in the correct order: levelcomplete => level complete screen
+        // Check for level completion
+        /*        bool isLoop = false;
+               if (highlightedTiles.Count > 2)
+               {
+                   Tile first = highlightedTiles[0];
+                   Tile last = highlightedTiles[highlightedTiles.Count - 1];
 
+                   if ((Mathf.Abs(first.X - last.X) == 1 && first.Y == last.Y) ||
+                       (Mathf.Abs(first.Y - last.Y) == 1 && first.X == last.X))
+                   {
+                       isLoop = true;
+                   }
+               } */
+
+        // If it’s a loop and all items are highlighted in order, complete the level
+        if (isLoop && AreAllItemsCollectedInOrder(highlightedTiles))
+        {
+            if (_levelManager != null)
+                _levelManager.CompleteLevel();
+            else
+                Debug.LogWarning("LevelManager not assigned in RopeManager!");
+        }
+        else if (isLoop && !AreAllItemsCollectedInOrder(highlightedTiles))
+        {
+
+            // Implement Fail sound here
+            //Implement wait 1-2 seconds here (such that tiles do not get immediately deleted)
+            foreach (GameObject segment in _ropeSegments)
+            {
+                Destroy(segment);
+            }
+            _ropeSegments.Clear();
+        }
 
     }
 
-private bool IsCorner(Tile prev, Tile current, Tile next)
-{
-    if (prev == null || next == null)
-        return false;
+    private bool IsCorner(Tile prev, Tile current, Tile next)
+    {
+        if (prev == null || next == null)
+            return false;
 
-    bool prevHorizontal = prev.Y == current.Y;
-    bool prevVertical = prev.X == current.X;
+        bool prevHorizontal = prev.Y == current.Y;
+        bool prevVertical = prev.X == current.X;
 
-    bool nextHorizontal = current.Y == next.Y;
-    bool nextVertical = current.X == next.X;
+        bool nextHorizontal = current.Y == next.Y;
+        bool nextVertical = current.X == next.X;
 
-    // Corner happens if direction changes
-    return (prevHorizontal != nextHorizontal) || (prevVertical != nextVertical);
-}
+        // Corner happens if direction changes
+        return (prevHorizontal != nextHorizontal) || (prevVertical != nextVertical);
+    }
 
-private Quaternion GetCornerRotation(Tile prev, Tile current, Tile next)
+    private Quaternion GetCornerRotation(Tile prev, Tile current, Tile next)
     {
         if (prev == null || next == null)
             return Quaternion.identity;
@@ -162,4 +192,25 @@ private Quaternion GetCornerRotation(Tile prev, Tile current, Tile next)
 
         return Quaternion.identity;
     }
+    
+    private bool AreAllItemsCollectedInOrder(List<Tile> highlightedTiles)
+{
+    int currentOrderIndex = 1;
+
+    foreach (Tile tile in highlightedTiles)
+    {
+        if (tile.HasItem())
+        {
+            Item item = tile.GetItem();
+            if (item.GetOrderIndex() != currentOrderIndex)
+                return false; // wrong order
+            currentOrderIndex++;
+        }
+    }
+
+        // all items were highlighted in the correct order
+    
+        // Bug: it is also enough to get 4 out of 5 in the correct order??
+    return true;
+}
 }

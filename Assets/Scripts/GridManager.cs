@@ -103,6 +103,8 @@ public class GridManager : MonoBehaviour
             Item spawnedItem = Instantiate(currentItemPrefab, itemPosition, currentItemPrefab.transform.rotation);
             spawnedItem.name = $"Item {i + 1}";
             spawnedItem.SetOrderIndex(i + 1);
+            // Assign the spawned item to the tile
+            chosenTile.SetItem(spawnedItem);
 
             // Spawn 3D item inside the panel
             Item itemQueue = Instantiate(currentItemPrefab, _itemQueuePanel);
