@@ -501,6 +501,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 958414267}
     m_Modifications:
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7339102275671576507, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
       propertyPath: m_Name
       value: Bead Var02
@@ -1504,6 +1528,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 538421517}
     m_Modifications:
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323812167255202358, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7339102275671576507, guid: 6e64060cb31e79a4b910aca35912a73d, type: 3}
       propertyPath: m_Name
       value: Bead Var02
