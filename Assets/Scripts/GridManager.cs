@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Transform _itemQueuePanel;
 
-    private List<Tile> _highlightedTiles = new List<Tile>();
+    public List<Tile> _highlightedTiles = new List<Tile>();
     public List<Tile> _allTiles = new List<Tile>();
 
     public int countItems;
@@ -75,7 +75,7 @@ public class GridManager : MonoBehaviour
     void SpawnOrderedItems()
     {
         countItems = _itemPrefabs.Count;
-        
+
         if (_allTiles.Count < countItems)
         {
             Debug.LogWarning("Not enough tiles to place items!");
@@ -86,7 +86,7 @@ public class GridManager : MonoBehaviour
         List<Tile> availableTiles = new List<Tile>(_allTiles);
         List<Tile> chosenTiles = new List<Tile>();
 
-        List<Item> itemPool = new List<Item>(_itemPrefabs); // we don't want list to be emptied permanently
+        List<Item> itemPool = new List<Item>(_itemPrefabs); // we don't want list to be emptied permanently (create copy!)
 
         List<int> itemLocations = new List<int> { 0, 6, 12, 13, 14, 15};
 

@@ -11,16 +11,18 @@ public class FillBracelet : MonoBehaviour
     [SerializeField] private Transform socketTwo;
     [SerializeField] private Transform socketThree;
     [SerializeField] private Transform socketFour;
+    
+    // Note: THe correct order of the items is available in GridManager.cs > ItemIndexList (you need to make it public first)
 
     private void OnEnable()
     {
         //assign list through gridmanager
 
-        foreach(GameObject itemGO in itemOrder)
+        foreach (GameObject itemGO in itemOrder)
         {
             itemGO.GetComponent<RotateObject>().stopRotate = true;
             //item.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            itemGO.transform.Find("BeadTransform").transform.localRotation = new Quaternion(0f,0f,0f,0f);
+            itemGO.transform.Find("BeadTransform").transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
             itemGO.transform.Find("BeadTransform").transform.localScale = new Vector3(1f, 1f, 1f);
         }
 

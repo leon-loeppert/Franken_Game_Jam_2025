@@ -11,7 +11,6 @@ public class RopeManager : MonoBehaviour
 
     [SerializeField] private AudioClip _ropeExtendSound;
     [SerializeField] private AudioClip _failedChainSound;
-    [SerializeField] private float _waitToDelete;
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] public GridManager _gridManager;
 
@@ -28,7 +27,7 @@ public class RopeManager : MonoBehaviour
         // skip if not enough tiles (you need at least two tiles to form a segment)
         if (highlightedTiles.Count < 2) return;
 
-        bool isLoop = false;
+        /* bool isLoop = false;
         if (highlightedTiles.Count > 2)
         {
             Tile first = highlightedTiles[0];
@@ -143,10 +142,7 @@ public class RopeManager : MonoBehaviour
         // If it’s a loop and all items are highlighted in order, complete the level
         if (isLoop && AreAllItemsCollectedInOrder(highlightedTiles))
         {
-            if (_levelManager != null)
-                _levelManager.CompleteLevel();
-            else
-                Debug.LogWarning("LevelManager not assigned in RopeManager!");
+            _levelManager.CompleteLevel();
         }
         // if not: failure sound and delete segments
         else if (isLoop && !AreAllItemsCollectedInOrder(highlightedTiles))
@@ -164,6 +160,7 @@ public class RopeManager : MonoBehaviour
     IEnumerator DestroyRopeSegments()
     {
         //Wait until SoundFX and VFX are complete
+        float _waitToDelete = 10f;
         yield return new WaitForSeconds(_waitToDelete);
 
         foreach (GameObject segment in _ropeSegments)
@@ -209,21 +206,21 @@ public class RopeManager : MonoBehaviour
 
         return Quaternion.identity;
     }
-    
+
     private bool AreAllItemsCollectedInOrder(List<Tile> highlightedTiles)
-{
+    {
 
         // Check if all squares are highlighted (optional game element: user has to pass all fields) 
         // if (highlightedTiles.Count != _gridManager._allTiles.Count) return false;
 
 
         // Check if there are as many items highlighted as there are items on the grid
-    int countHighlightedItems = highlightedTiles.Count(tile => tile.HasItem());
-    if (countHighlightedItems != _gridManager.countItems) return false;
+        int countHighlightedItems = highlightedTiles.Count(tile => tile.HasItem());
+        if (countHighlightedItems != _gridManager.countItems) return false;
 
-    int currentOrderIndex = 1;
+        int currentOrderIndex = 1;
 
-    foreach (Tile tile in highlightedTiles)
+        foreach (Tile tile in highlightedTiles)
         {
             if (tile.HasItem())
             {
@@ -237,7 +234,8 @@ public class RopeManager : MonoBehaviour
         // all items were highlighted in the correct order
 
         // Bug: it is also enough to get less than 5 in the correct order
-        
-    return true;
-}
+
+        return true;
+    }
+
 }
