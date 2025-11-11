@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class RopeManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class RopeManager : MonoBehaviour
     [SerializeField] private AudioClip _failedChainSound;
     [SerializeField] private float _waitToDelete;
     [SerializeField] private LevelManager _levelManager;
+    [SerializeField] public GridManager _gridManager;
 
     // Keep track of instantiated rope pieces
     private List<GameObject> _ropeSegments = new List<GameObject>();
@@ -146,6 +148,7 @@ public class RopeManager : MonoBehaviour
             else
                 Debug.LogWarning("LevelManager not assigned in RopeManager!");
         }
+        // if not: failure sound and delete segments
         else if (isLoop && !AreAllItemsCollectedInOrder(highlightedTiles))
         {
 
@@ -209,22 +212,32 @@ public class RopeManager : MonoBehaviour
     
     private bool AreAllItemsCollectedInOrder(List<Tile> highlightedTiles)
 {
+
+        // Check if all squares are highlighted (optional game element: user has to pass all fields) 
+        // if (highlightedTiles.Count != _gridManager._allTiles.Count) return false;
+
+
+        // Check if there are as many items highlighted as there are items on the grid
+    int countHighlightedItems = highlightedTiles.Count(tile => tile.HasItem());
+    if (countHighlightedItems != _gridManager.countItems) return false;
+
     int currentOrderIndex = 1;
 
     foreach (Tile tile in highlightedTiles)
-    {
-        if (tile.HasItem())
         {
-            Item item = tile.GetItem();
-            if (item.GetOrderIndex() != currentOrderIndex)
-                return false; // wrong order
-            currentOrderIndex++;
+            if (tile.HasItem())
+            {
+                Item item = tile.GetItem();
+                if (item.GetOrderIndex() != currentOrderIndex)
+                    return false; // wrong order
+                currentOrderIndex++;
+            }
         }
-    }
 
         // all items were highlighted in the correct order
-    
-        // Bug: it is also enough to get 4 out of 5 in the correct order??
+
+        // Bug: it is also enough to get less than 5 in the correct order
+        
     return true;
 }
 }

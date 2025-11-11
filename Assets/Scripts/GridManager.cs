@@ -17,14 +17,19 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform _itemQueuePanel;
 
     private List<Tile> _highlightedTiles = new List<Tile>();
-    private List<Tile> _allTiles = new List<Tile>();
+    public List<Tile> _allTiles = new List<Tile>();
+
+    public int countItems;
 
     public RopeManager RopeManager;
+
 
     void Start()
     {
         GenerateGrid();
         SpawnOrderedItems();
+
+        RopeManager._gridManager = this; // now they are automatically linked, without inspector
     }
 
     void GenerateGrid()
@@ -69,9 +74,9 @@ public class GridManager : MonoBehaviour
 
     void SpawnOrderedItems()
     {
-        int count = _itemPrefabs.Count;
-
-        if (_allTiles.Count < count)
+        countItems = _itemPrefabs.Count;
+        
+        if (_allTiles.Count < countItems)
         {
             Debug.LogWarning("Not enough tiles to place items!");
             return;
@@ -87,7 +92,7 @@ public class GridManager : MonoBehaviour
 
         List<int> ItemIndexList = new List<int>();
         
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < countItems; i++)
         {
             // int randomTileIndex = UnityEngine.Random.Range(0, availableTiles.Count); // random number!
             int randomTileIndex = itemLocations[i];
@@ -98,7 +103,7 @@ public class GridManager : MonoBehaviour
             // Pick random item prefab
             int randomItemIndex = UnityEngine.Random.Range(0, itemPool.Count);
             ItemIndexList.Add(randomItemIndex);
-            
+
             Item currentItemPrefab = itemPool[randomItemIndex];
             itemPool.RemoveAt(randomItemIndex); // no duplicates
 
