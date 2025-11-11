@@ -42,21 +42,19 @@ public class Tile : MonoBehaviour
 
 
 
-/*     void OnMouseDown()
+    void OnMouseDown()
     {
          if (!_gridManager.GetHighlightedTiles().Contains(this) &&
-         (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToPrevHighlightedTile()) 
+         (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToPrevHighlightedTile()))
         {
             Highlight();
         }
         //Highlight(this);
-    } */
-
-    // || this == _gridManager.GetHighlightedTiles()[0])
+    }
 
     void OnMouseEnter()
     {
-        if (Input.GetMouseButton(0)) // left mouse button clicked
+        if (Input.GetMouseButton(0)) // mouse is held down
         {
             if (!_gridManager.GetHighlightedTiles().Contains(this) &&
                 (_gridManager.GetHighlightedTiles().Count == 0 || IsAdjacentToPrevHighlightedTile()))
@@ -74,6 +72,8 @@ public class Tile : MonoBehaviour
 
     private void Highlight()
     {
+
+        if (_isHighlighted) return; // avoid double highlighting (is this needed?)
 
         _highlight.SetActive(true);
         _isHighlighted = true;
@@ -107,8 +107,7 @@ public Item GetItem()
     return _item;
 }
 
-// i think we can drop this: (try out)
-    private void Update()
+private void Update()
     {
         if (!Input.GetMouseButton(0))
         {
