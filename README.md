@@ -43,8 +43,8 @@ The theme for 2025 was "Everything is Connected!" which could be interpreted in 
 
 ## :dancers: Developers
 We are a team of two artists (Christina Lutz and Enrique Martinez) and one applied statistician (Leon Löppert), all of whom had very limited prior experience in game development. The distribution of tasks was as follows:
-	•	Christina Lutz (Art & Project Management)
-	•	Leon Löppert (Programming)
+	•	[Christina Luntz](https://www.linkedin.com/in/christina-luntz-a30642261/) (Art & Project Management)
+	•	[Leon Löppert](https://www.linkedin.com/in/leonloeppert/) (Programming)
 	•	Enrique Martinez (Art & Game Design)
 
 Franken Game Jam offered us a great opportunity to be creative over the course of one weekend. During this time, we learned many new skills, ranging from 3D modeling in Blender to development in Unity and programming in C#.
