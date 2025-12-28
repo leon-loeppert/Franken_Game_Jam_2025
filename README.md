@@ -49,8 +49,10 @@ We are a team of two artists (Christina Lutz and Enrique Martinez) and one appli
 
 Franken Game Jam offered us a great opportunity to be creative over the course of one weekend. During this time, we learned many new skills, ranging from 3D modeling in Blender to development in Unity and programming in C#.
 
+Feel free to contact us for feedback and questions.
 
-## Bugs
+
+## :beetle: Bugs
 - The rope should reset when the mouse button is released
 - The loop currently closes when hovering over a field adjacent to the start tile; instead, it should only close when the rope explicitly connects the end back to the start
 - The bead around the planet in the start screen should be colored
