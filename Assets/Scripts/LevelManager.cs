@@ -11,17 +11,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float waitTime = 3f;
 
     [SerializeField] private AudioClip successSound;
-    [SerializeField] private float successVolume = 1;
+    [SerializeField] private float successVolume = 1.0f;
     [SerializeField] private GameObject successFX;
 
     
     public void CompleteLevel()
     {
-        StartCoroutine(ChangeScreen());
-
         //Play SoundFX & VFX
         SoundFXManager.instance.PlaySoundFXClip(successSound, transform, successVolume);
         successFX.SetActive(true);
+        StartCoroutine(ChangeScreen());
     }
 
     IEnumerator ChangeScreen()

@@ -26,10 +26,10 @@ public class RopeManager : MonoBehaviour
         _ropeSegments.Clear();
 
         // skip if not enough tiles (you need at least two tiles to form a segment)
-        if (highlightedTiles.Count < 2) return;
+        if (highlightedTiles.Count < 2) return; // todo: already the first highlighted tile should show a rope segment
 
         bool isLoop = false;
-        if (highlightedTiles.Count > 2)
+        if (highlightedTiles.Count > 3)
         {
             Tile first = highlightedTiles[0];
             Tile last = highlightedTiles[highlightedTiles.Count - 1];
@@ -143,10 +143,7 @@ public class RopeManager : MonoBehaviour
         // If it’s a loop and all items are highlighted in order, complete the level
         if (isLoop && AreAllItemsCollectedInOrder(highlightedTiles))
         {
-            if (_levelManager != null)
-                _levelManager.CompleteLevel();
-            else
-                Debug.LogWarning("LevelManager not assigned in RopeManager!");
+            _levelManager.CompleteLevel();
         }
         // if not: failure sound and delete segments
         else if (isLoop && !AreAllItemsCollectedInOrder(highlightedTiles))

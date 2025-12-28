@@ -99,7 +99,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click and Drag to connect the beads in the right order!
+  m_text: Click and drag to connect the beads in the right order!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afa52d26ab9583b42ac1c7b38856b347, type: 2}
   m_sharedMaterial: {fileID: -4031642593843702438, guid: afa52d26ab9583b42ac1c7b38856b347, type: 2}
